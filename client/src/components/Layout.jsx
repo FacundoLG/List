@@ -4,7 +4,13 @@ import Navbar from "./Navbar";
 
 const MyLayout = styled.div`
   display: flex;
-  margin: var(--space-2);
+  height: 100vh;
+`;
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  padding: var(--space-2);
+  padding-bottom: 0;
   main {
     display: flex;
     width: 100%;
@@ -12,12 +18,13 @@ const MyLayout = styled.div`
     align-items: center;
   }
 `;
-
 const Layout = ({ children }) => {
   return (
     <MyLayout>
-      <Navbar />
-      <main>{children}</main>
+      <Container>
+        <Navbar />
+        <main>{children}</main>
+      </Container>
     </MyLayout>
   );
 };
