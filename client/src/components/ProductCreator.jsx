@@ -7,6 +7,7 @@ const Creator = styled.div`
   justify-content: space-between;
   width: 70vw;
   height: 15vh;
+  min-width: 290px;
   max-width: 535px;
   max-height: 90px;
   padding: var(--space-2);
@@ -44,6 +45,14 @@ const Creator = styled.div`
         text-align: center;
         outline: none;
         font-weight: 600;
+        ::-webkit-outer-spin-button,
+        ::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        [type="number"] {
+          -moz-appearance: textfield;
+        }
       }
       .colors {
         display: flex;
@@ -53,6 +62,12 @@ const Creator = styled.div`
           background: #000;
           border-radius: 50%;
           aspect-ratio: 1;
+          :hover {
+            cursor: pointer;
+            box-shadow: 1px 2px 5px 1px var(--third-color);
+            transition: 200ms ease;
+            filter: brightness(1.2);
+          }
         }
         .color1 {
           background: var(--color1);
@@ -68,6 +83,9 @@ const Creator = styled.div`
         }
       }
     }
+  }
+  @media (max-width: 500px) {
+    width: 90vw;
   }
 `;
 

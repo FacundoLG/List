@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 const MyLayout = styled.div`
   display: flex;
-  margin: 20px;
+  margin: var(--space-2);
   main {
     display: flex;
     width: 100%;

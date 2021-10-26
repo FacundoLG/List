@@ -7,6 +7,9 @@ const MyNavBar = styled.nav`
   display: flex;
   flex-direction: column;
   width: 50px;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const IconContainer = styled.div`
