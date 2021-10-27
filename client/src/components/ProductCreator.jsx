@@ -6,9 +6,7 @@ const Creator = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 10px;
-  padding: var(--space-2);
-  color: var(--font-color);
-  background: var(--third-color);
+
   .ProductName {
     display: flex;
     height: 34px;
@@ -27,13 +25,13 @@ const Creator = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0px var(--space-1);
+      margin: 0px var(--space-0);
       label {
         margin: var(--space-1) 0px;
         font-size: 14px;
       }
       input {
-        width: 60px;
+        width: 55px;
         background: var(--primary-color);
         border: none;
         border-radius: 50px;
@@ -80,6 +78,40 @@ const Creator = styled.div`
         }
       }
     }
+    .buttonContainer {
+      display: flex;
+      justify-content: center;
+      button {
+        margin: var(--space-2) 0px 0px 0px;
+      }
+    }
+  }
+`;
+
+const CreatorContainer = styled.div`
+  padding: var(--space-2);
+  color: var(--font-color);
+  background: var(--third-color);
+  border-radius: 10px;
+  .buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    button {
+      border: none;
+      margin-top: var(--space-1);
+      padding: var(--space-0-5) var(--space-1);
+      border-radius: 5px;
+      background: var(--secondary-color);
+      color: var(--font-color);
+      font-family: "Lato", Arial, Helvetica, sans-serif;
+      :hover {
+        cursor: pointer;
+      }
+      :active {
+        filter: brightness(1.2);
+      }
+    }
   }
 `;
 
@@ -97,107 +129,98 @@ const ProductCreator = ({ create }) => {
     setFocus(false);
   };
 
-  const sendData = (e) => {
-    e.preventDefault();
-    if (e.key === "Enter") {
-      console.log("enter");
-      if (focus === true) {
-        // sendData();
-        console.log("Enviando data");
-        // const data = {
-        //   name: productName,
-        //   quantity: productQuantity,
-        //   unity: productUnity,
-        //   color: productColor,
-        // };
-        // create(data);
-        // setProductName("");
-        // setProductQuantity("");
-        // setProductUnity("")
-      }
-    }
+  const sendData = () => {
+    console.log("Enviando data");
+    const data = {
+      name: productName,
+      quantity: productQuantity,
+      unity: productUnity,
+      color: productColor,
+    };
+    create(data);
+    setProductName("");
+    setProductQuantity("");
+    setProductUnity("");
   };
 
-  useEffect(() => {
-    document.addEventListener("keyup", sendData);
-    return () => {
-      document.removeEventListener("keyup", sendData, false);
-    };
-  }, [focus]);
-
-  console.log(focus);
-
   return (
-    <Creator>
-      <input
-        id="name"
-        type="text"
-        className="ProductName"
-        onFocus={focused}
-        onBlur={unfocused}
-        value={productName}
-        onChange={(e) => {
-          setProductName(e.target.value);
-        }}
-      />
-      <div className="ProductParams">
-        <div className="params">
-          <label htmlFor="params">Cantidad</label>
-          <input
-            id="quantity"
-            type="number"
-            onFocus={focused}
-            onBlur={unfocused}
-            value={productQuantity}
-            onChange={(e) => {
-              setProductQuantity(e.target.value);
-            }}
-          />
-        </div>
-        <div className="params">
-          <label htmlFor="unity">Unidad</label>
-          <input
-            id="unity"
-            type="text"
-            value={productUnity}
-            onFocus={focused}
-            onBlur={unfocused}
-            onChange={(e) => {
-              setProductUnity(e.target.value);
-            }}
-          />
-        </div>
-        <div className="params ">
-          <label htmlFor="">Color</label>
-          <div className="colors">
-            <div
-              className="color1"
-              onClick={() => {
-                setProductColor(1);
+    <CreatorContainer>
+      <Creator>
+        <input
+          id="productname"
+          type="text"
+          className="ProductName"
+          onFocus={focused}
+          onBlur={unfocused}
+          value={productName}
+          onChange={(e) => {
+            setProductName(e.target.value);
+          }}
+        />
+        <div className="ProductParams">
+          <div className="params">
+            <label htmlFor="params">Cantidad</label>
+            <input
+              id="quantity"
+              type="number"
+              onFocus={focused}
+              onBlur={unfocused}
+              value={productQuantity}
+              onChange={(e) => {
+                setProductQuantity(e.target.value);
               }}
-            ></div>
-            <div
-              className="color2"
-              onClick={() => {
-                setProductColor(2);
+            />
+          </div>
+          <div className="params">
+            <label htmlFor="unity">Unidad</label>
+            <input
+              id="unity"
+              type="text"
+              value={productUnity}
+              onFocus={focused}
+              onBlur={unfocused}
+              onChange={(e) => {
+                if (e.target.value.length <= 3) {
+                  setProductUnity(e.target.value);
+                }
               }}
-            ></div>
-            <div
-              className="color3"
-              onClick={() => {
-                setProductColor(3);
-              }}
-            ></div>
-            <div
-              className="color4"
-              onClick={() => {
-                setProductColor(4);
-              }}
-            ></div>
+            />
+          </div>
+          <div className="params ">
+            <label htmlFor="">Color</label>
+            <div className="colors">
+              <div
+                className="color1"
+                onClick={() => {
+                  setProductColor(1);
+                }}
+              ></div>
+              <div
+                className="color2"
+                onClick={() => {
+                  setProductColor(2);
+                }}
+              ></div>
+              <div
+                className="color3"
+                onClick={() => {
+                  setProductColor(3);
+                }}
+              ></div>
+              <div
+                className="color4"
+                onClick={() => {
+                  setProductColor(4);
+                }}
+              ></div>
+            </div>
           </div>
         </div>
+      </Creator>
+      <div className="buttonContainer">
+        <button onClick={sendData}>Create</button>
       </div>
-    </Creator>
+    </CreatorContainer>
   );
 };
 

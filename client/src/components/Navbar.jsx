@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import { BsList, BsHouseFill, BsGearFill } from "react-icons/bs";
-
+import { BsHouseFill, BsGearFill } from "react-icons/bs";
+import { BiLogOutCircle } from "react-icons/bi";
 const MyNavBar = styled.nav`
   display: flex;
   flex-direction: column;
-  width: 40px;
+  justify-content: space-between;
+  align-items: center;
+  width: 45px;
+  height: 80vh;
+  margin: auto;
+  background: var(--secondary-color);
+  border-radius: 20px;
   @media (max-width: 500px) {
     display: none;
   }
@@ -17,11 +23,9 @@ const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  font-size: 32px;
-  margin-bottom: 50px;
+  font-size: 28px;
   padding: var(--space-1);
   color: var(--font-color);
-  background: var(--secondary-color);
   aspect-ratio: 1;
 `;
 
@@ -29,13 +33,13 @@ const Navbar = () => {
   return (
     <MyNavBar>
       <IconContainer>
-        <BsList />
-      </IconContainer>
-      <IconContainer>
         <BsHouseFill />
       </IconContainer>
       <IconContainer>
         <BsGearFill />
+      </IconContainer>
+      <IconContainer>
+        <BiLogOutCircle />
       </IconContainer>
     </MyNavBar>
   );
