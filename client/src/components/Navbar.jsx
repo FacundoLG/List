@@ -6,7 +6,7 @@ import { BsList, BsHouseFill, BsGearFill } from "react-icons/bs";
 const MyNavBar = styled.nav`
   display: flex;
   flex-direction: column;
-  width: 50px;
+  width: 40px;
   @media (max-width: 500px) {
     display: none;
   }

@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Creator = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 70vw;
-  height: 15vh;
-  min-width: 290px;
-  max-width: 535px;
-  max-height: 90px;
-  padding: var(--space-2);
   border-radius: 10px;
+  padding: var(--space-2);
   color: var(--font-color);
   background: var(--third-color);
   .ProductName {
@@ -26,6 +21,8 @@ const Creator = styled.div`
   }
   .ProductParams {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     .params {
       display: flex;
       flex-direction: column;
@@ -84,31 +81,119 @@ const Creator = styled.div`
       }
     }
   }
-  @media (max-width: 500px) {
-    width: 90vw;
-  }
 `;
 
-const ProductCreator = () => {
+const ProductCreator = ({ create }) => {
+  const [productName, setProductName] = useState("");
+  const [productQuantity, setProductQuantity] = useState("");
+  const [productUnity, setProductUnity] = useState("");
+  const [productColor, setProductColor] = useState(1);
+  const [focus, setFocus] = useState(false);
+
+  const focused = () => {
+    setFocus(true);
+  };
+  const unfocused = () => {
+    setFocus(false);
+  };
+
+  const sendData = (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      console.log("enter");
+      if (focus === true) {
+        // sendData();
+        console.log("Enviando data");
+        // const data = {
+        //   name: productName,
+        //   quantity: productQuantity,
+        //   unity: productUnity,
+        //   color: productColor,
+        // };
+        // create(data);
+        // setProductName("");
+        // setProductQuantity("");
+        // setProductUnity("")
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", sendData);
+    return () => {
+      document.removeEventListener("keyup", sendData, false);
+    };
+  }, [focus]);
+
+  console.log(focus);
+
   return (
     <Creator>
-      <input type="text" className="ProductName" />
+      <input
+        id="name"
+        type="text"
+        className="ProductName"
+        onFocus={focused}
+        onBlur={unfocused}
+        value={productName}
+        onChange={(e) => {
+          setProductName(e.target.value);
+        }}
+      />
       <div className="ProductParams">
         <div className="params">
-          <label htmlFor="">Cantidad</label>
-          <input type="number" />
+          <label htmlFor="params">Cantidad</label>
+          <input
+            id="quantity"
+            type="number"
+            onFocus={focused}
+            onBlur={unfocused}
+            value={productQuantity}
+            onChange={(e) => {
+              setProductQuantity(e.target.value);
+            }}
+          />
         </div>
         <div className="params">
-          <label htmlFor="">Unidad</label>
-          <input type="text" />
+          <label htmlFor="unity">Unidad</label>
+          <input
+            id="unity"
+            type="text"
+            value={productUnity}
+            onFocus={focused}
+            onBlur={unfocused}
+            onChange={(e) => {
+              setProductUnity(e.target.value);
+            }}
+          />
         </div>
         <div className="params ">
           <label htmlFor="">Color</label>
           <div className="colors">
-            <div className="color1"></div>
-            <div className="color2"></div>
-            <div className="color3"></div>
-            <div className="color4"></div>
+            <div
+              className="color1"
+              onClick={() => {
+                setProductColor(1);
+              }}
+            ></div>
+            <div
+              className="color2"
+              onClick={() => {
+                setProductColor(2);
+              }}
+            ></div>
+            <div
+              className="color3"
+              onClick={() => {
+                setProductColor(3);
+              }}
+            ></div>
+            <div
+              className="color4"
+              onClick={() => {
+                setProductColor(4);
+              }}
+            ></div>
           </div>
         </div>
       </div>

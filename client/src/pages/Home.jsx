@@ -6,11 +6,24 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 100%;
+  width: 70vw;
+  min-width: 290px;
+  max-width: 535px;
+  @media (max-width: 500px) {
+    width: 90vw;
+  }
 `;
 const Home = () => {
+  const LogData = (data) => {
+    console.log(data);
+  };
   return (
     <HomeContainer>
-      <ProductCreator />
+      <ProductCreator
+        create={(data) => {
+          LogData(data);
+        }}
+      />
       <ProductList />
     </HomeContainer>
   );

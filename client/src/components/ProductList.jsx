@@ -7,23 +7,29 @@ const List = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
   color: wheat;
+  margin-top: var(--space-1);
+  /* width */
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 `;
 
 const ProductList = ({ products }) => {
   return (
     <List>
-      {products?.map((product) => (
+      {/* {products?.map((product) => (
         <Product />
-      ))}
-      <h1>asdasd</h1>
-      <h1>asdasd</h1>
-      <h1>asdasd</h1>
-      <h1>asdasd</h1>
-      <h1>asdasd</h1>
-      <h1>asdasd</h1>
-      <h1>asdasd</h1>
+      ))} */}
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
     </List>
   );
 };
