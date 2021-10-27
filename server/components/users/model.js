@@ -7,7 +7,15 @@ const mySchema = new Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
-const model = mongoose.model("User", mySchema);
+const model = mongoose.model("users", mySchema);
 module.exports = model;

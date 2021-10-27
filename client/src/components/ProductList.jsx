@@ -30,6 +30,11 @@ const ProductList = ({ products }) => {
       <Product />
       <Product />
       <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
     </List>
   );
 };
