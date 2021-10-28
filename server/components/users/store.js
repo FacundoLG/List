@@ -10,4 +10,8 @@ module.exports = {
 
     newUser.save();
   },
+  getOneUser: (data) => {
+    const result = userModel().findOne({_id: data.id})
+  }
+
 };
