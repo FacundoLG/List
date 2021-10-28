@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { UserContext } from "./UserContex";
 import UserReducer from "./UserReducer";
 
 const UserState = () => {
@@ -14,6 +15,12 @@ const UserState = () => {
   const setUser = () => {};
 
   const getUser = () => {};
+
+  return(
+    <UserContext.Provider value={ UserState,getUser} >
+
+    </UserContext.Provider>
+  )
 };
 
 export default UserState;

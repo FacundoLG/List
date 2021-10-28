@@ -16,6 +16,7 @@ const HomeContainer = styled.div`
 const Home = () => {
   const LogData = (data) => {
     console.log(data);
+    //Pushear la data usando el token en el contexto del usuario y su id
   };
   return (
     <HomeContainer>
