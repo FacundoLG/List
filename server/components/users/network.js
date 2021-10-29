@@ -5,36 +5,34 @@ const router = express.Router();
 
 router.post("/singup", (req, res) => {
   const { username, email, password, confirmationPassword } = req.body;
-  if (password === !confirmationPassword) {
+  if (password !== confirmationPassword) {
     response.error(
       req,
       res,
-      "password and confirm password are not equals",
+      "password and confirmation password are not equals",
       400
     );
+  } else {
+    createUser({ username, email, password })
+      .then((message) => {
+        response.success(req, res, message);
+      })
+      .catch((err) => {
+        response.error(req, res, err.message, 500, err);
+      });
   }
-  createUser({ username, email, password })
-    .then((message) => {º
+});
+
+router.post("/singin", (req, res) => {
+  const { username, password } = req.body;
+  //Buscando el usuario
+  getUser({ username, password })
+    .then((message) => {
       response.success(req, res, message);
     })
     .catch((err) => {
-      response.error(req, res, "Internal error", 500, err);
+      response.error(req, res, "Incorrect username or password", 500, err);
     });
 });
-
-
-router.post("singin",(req,res) => {
-  const {username,email,hashedPassword} = req.body;
-  //Buscando el usuario
-  getUser(data).then((message) => {
-    //Bcrypy verifica la contraseña
-        // genera el token y se le da una una fecha de expiracion
-        // o se envia el error "Bad combination"
-    response.success(req,res,message)
-  }).catch((err) => {
-    response.error(req,res,"User does not exist",500,err)
-  })
-
-})  
 
 module.exports = router;

@@ -4,14 +4,13 @@ module.exports = {
   addUser: async (data) => {
     const newUser = new userModel({
       username: data.username,
-      email: data.email,
       password: data.password,
+      email: data.email,
     });
-
-    newUser.save();
+    await newUser.save();
   },
-  getOneUser: (data) => {
-    const result = userModel().findOne({_id: data.id})
-  }
-
+  getOneUser: async (data) => {
+    const result = await userModel.findOne({ username: data.username });
+    return result;
+  },
 };

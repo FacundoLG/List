@@ -3,7 +3,7 @@ module.exports = {
     res.status(status || 200).json({ message });
   },
   error: (req, res, error, status, log) => {
-    console.log(log);
+    if (log) console.log(log);
     res.status(status || 500).json({ error });
   },
 };
