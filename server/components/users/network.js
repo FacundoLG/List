@@ -1,7 +1,12 @@
 const express = require("express");
 const response = require("../../network/response");
 const { createUser, getUser } = require("./controler");
+const { verifyToken } = require("../../auth/JWT");
 const router = express.Router();
+
+router.post("/test", verifyToken, (req, res) => {
+  response.success(req, res, req.user);
+});
 
 router.post("/singup", (req, res) => {
   const { username, email, password, confirmationPassword } = req.body;

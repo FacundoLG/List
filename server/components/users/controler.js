@@ -1,10 +1,19 @@
 const { addUser, getOneUser } = require("./store");
 const bcrypt = require("bcrypt");
+
+const { generateToken } = require("../../auth/JWT.js");
 const saltRounds = 10;
+
 module.exports = {
   createUser: (data) => {
     let { username, password, email } = data;
     return new Promise((resolve, reject) => {
+      getOneUser(data.username).then((result) => {
+        if (result[0]) {
+          reject("User already exist");
+        }
+      });
+
       bcrypt.hash(password, saltRounds).then((password) => {
         addUser({ username, email, password })
           .then(() => {
@@ -25,12 +34,14 @@ module.exports = {
           // o se envia el error "Bad combination"
           const match = await bcrypt.compare(data.password, user.password);
           if (match) {
-            // genera el token y se le da una una fecha de expiracion
             const user_data = {
               id: user._id,
               username: user.username,
             };
-            resolve(user_data);
+            // genera el token y se le da una una fecha de expiracion
+            generateToken(user_data).then((token) => {
+              resolve({ ...user_data, token });
+            });
           } else {
             reject();
           }
