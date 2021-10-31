@@ -6,7 +6,7 @@ const MyProduct = styled.div`
   align-items: center;
   justify-content: space-between;
   min-height: 9vh;
-  background: var(--secondary-color);
+  border: solid var(--secondary-color) 1px;
   padding: var(--space-1);
   margin: var(--space-0-5) 0;
   border-radius: 10px;
@@ -20,7 +20,7 @@ const MyProduct = styled.div`
     font-size: 25px;
     span {
       font-size: 20px;
-      background: var(--primary-color);
+      background: var(--secondary-color);
       padding: 0px var(--space-2);
       border-radius: 20px;
     }

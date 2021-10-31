@@ -16,11 +16,9 @@ const UserState = () => {
 
   const getUser = () => {};
 
-  return(
-    <UserContext.Provider value={ UserState,getUser} >
-
-    </UserContext.Provider>
-  )
+  return (
+    <UserContext.Provider value={(setUser, getUser)}></UserContext.Provider>
+  );
 };
 
 export default UserState;
