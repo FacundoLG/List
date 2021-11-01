@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import { UserContext } from "./UserContex";
 import UserReducer from "./UserReducer";
 
-const UserState = () => {
+const UserState = ({ children }) => {
   const initialState = {
     user: {
       username: null,
@@ -12,12 +12,17 @@ const UserState = () => {
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  const setUser = () => {};
-
-  const getUser = () => {};
+  const setUser = (data) => {
+    dispatch({
+      type: "SET_USER",
+      payload: data,
+    });
+  };
 
   return (
-    <UserContext.Provider value={(setUser, getUser)}></UserContext.Provider>
+    <UserContext.Provider value={{ user: state.user, setUser }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 
