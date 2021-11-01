@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { InputContainer, Container, Form } from "./styles";
 const Singup = () => {
@@ -21,7 +22,17 @@ const Singup = () => {
             <p className="error"></p>
           </InputContainer>
         </div>
-        <button>Sing-Up</button>
+        <div>
+          <button>Sing-Up</button>
+          <p className="text">
+            Already have and account{" "}
+            <span>
+              <Link className="link" to="/singin">
+                Sing-In
+              </Link>
+            </span>
+          </p>
+        </div>
       </Form>
     </Container>
   );

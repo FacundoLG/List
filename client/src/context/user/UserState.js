@@ -6,7 +6,7 @@ const UserState = ({ children }) => {
   const initialState = {
     user: {
       username: null,
-      tkn: null,
+      token: null,
     },
   };
 

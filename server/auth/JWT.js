@@ -6,7 +6,6 @@ const privateKey = process.env.SECRET;
 module.exports = {
   generateToken: (toSave) => {
     return new Promise((resolve, reject) => {
-      console.log(privateKey);
       const token = jwt.sign(toSave, privateKey, { expiresIn: "1d" });
       if (token) {
         resolve(token);

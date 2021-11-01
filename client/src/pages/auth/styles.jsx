@@ -13,8 +13,8 @@ export const Form = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 310px;
-  height: 400px;
+  width: 300px;
+  height: 430px;
   border: solid var(--font-color) 1px;
   border-radius: 10px;
   padding: var(--space-2);
@@ -24,6 +24,19 @@ export const Form = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    .text {
+      width: 100%;
+      text-align: center;
+      height: 14px;
+      margin: 0px;
+      margin-top: 2px;
+      font-size: 13px;
+      > span {
+        .link {
+          color: var(--secondary-color);
+        }
+      }
+    }
   }
   button {
     background: transparent;
@@ -56,6 +69,7 @@ export const InputContainer = styled.div`
     font-size: 13px;
     color: red;
   }
+
   input {
     font-size: 17px;
     margin-bottom: var(--space-2);

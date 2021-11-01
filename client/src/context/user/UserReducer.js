@@ -1,7 +1,7 @@
 import { SET_USER } from "../types";
 /* eslint-disable import/no-anonymous-default-export */
 
-export default (state, { type, payload }) => {
+const UserReducer = (state, { type, payload }) => {
   switch (type) {
     case SET_USER:
       return { ...state, user: payload };
@@ -10,3 +10,5 @@ export default (state, { type, payload }) => {
       return state;
   }
 };
+
+export default UserReducer;
