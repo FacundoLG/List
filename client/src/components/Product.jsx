@@ -8,7 +8,7 @@ const MyProduct = styled.div`
   min-height: 9vh;
   border: solid var(--secondary-color) 1px;
   padding: var(--space-1);
-  margin: var(--space-0-5) 0;
+  margin: var(--space-0-5);
   border-radius: 10px;
   p {
     margin: 0px;

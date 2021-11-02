@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Creator = styled.div`
@@ -120,14 +120,6 @@ const ProductCreator = ({ create }) => {
   const [productQuantity, setProductQuantity] = useState("");
   const [productUnity, setProductUnity] = useState("");
   const [productColor, setProductColor] = useState(1);
-  const [focus, setFocus] = useState(false);
-
-  const focused = () => {
-    setFocus(true);
-  };
-  const unfocused = () => {
-    setFocus(false);
-  };
 
   const sendData = () => {
     console.log("Enviando data");
@@ -150,8 +142,6 @@ const ProductCreator = ({ create }) => {
           id="productname"
           type="text"
           className="ProductName"
-          onFocus={focused}
-          onBlur={unfocused}
           value={productName}
           onChange={(e) => {
             setProductName(e.target.value);
@@ -163,8 +153,6 @@ const ProductCreator = ({ create }) => {
             <input
               id="quantity"
               type="number"
-              onFocus={focused}
-              onBlur={unfocused}
               value={productQuantity}
               onChange={(e) => {
                 setProductQuantity(e.target.value);
@@ -177,8 +165,6 @@ const ProductCreator = ({ create }) => {
               id="unity"
               type="text"
               value={productUnity}
-              onFocus={focused}
-              onBlur={unfocused}
               onChange={(e) => {
                 if (e.target.value.length <= 3) {
                   setProductUnity(e.target.value);
