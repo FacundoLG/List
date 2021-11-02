@@ -10,7 +10,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       getOneUser(data.username).then((result) => {
         if (result[0]) {
-          reject("User already exist");
+          reject({ message: "User already exist" });
         }
       });
 
@@ -30,6 +30,10 @@ module.exports = {
     return new Promise((resolve, reject) => {
       getOneUser(data)
         .then(async (user) => {
+          //Verificar si existe un usuario
+          if (!user) {
+            reject({ message: "User does not exist" });
+          }
           //Bcrypy verifica la contraseña
           // o se envia el error "Bad combination"
           const match = await bcrypt.compare(data.password, user.password);
@@ -43,11 +47,11 @@ module.exports = {
               resolve({ ...user_data, token });
             });
           } else {
-            reject();
+            reject({ message: "Incorrect user or password" });
           }
         })
         .catch((err) => {
-          reject(err);
+          reject({ message: "Incorrect user or password", err });
         });
     });
   },

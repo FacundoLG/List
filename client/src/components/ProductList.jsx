@@ -15,13 +15,16 @@ const List = styled.div`
 `;
 
 const ProductList = (props) => {
-  console.log(props.products);
   return (
     <List>
       {props.error && props.onError()}
-      {!props.error && props.products.lenght === 0 && props.onLoading()}
       {!props.error &&
-        props.products.map((prod, index) => props.render(prod, index))}
+        !props.products?.length &&
+        props.loading &&
+        props.onLoading()}
+      {!props.error && !props.loading && props.onEmpty()}
+      {!props.error &&
+        props.products?.map((prod, index) => props.render(prod, index))}
     </List>
   );
 };

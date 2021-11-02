@@ -9,6 +9,7 @@ const Singin = () => {
   const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const HandleSingIn = () => {
     fetch("http://localhost:3500/users/singin", {
       method: "POST",
@@ -23,7 +24,12 @@ const Singin = () => {
         if (data.message) {
           setUser(data.message);
           history.push("/home");
+        } else {
+          throw new Error(data.error);
         }
+      })
+      .catch(({ message }) => {
+        setError(message);
       });
   };
 
@@ -51,7 +57,7 @@ const Singin = () => {
                 setPassword(e.target.value);
               }}
             />
-            <p className="error"></p>
+            <p className="error">{error}</p>
           </InputContainer>
         </div>
         <div>

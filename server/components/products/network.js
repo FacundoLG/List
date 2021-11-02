@@ -1,8 +1,17 @@
 const express = require("express");
-const response = require("express");
+const response = require("../../network/response");
 const router = express.Router();
 const { verifyToken } = require("../../auth/JWT");
-const { createProduct } = "./controler.js";
+const { createProduct, getAllProducts } = require("./controler");
+router.get("/", verifyToken, (req, res) => {
+  getAllProducts(req.user)
+    .then((results) => {
+      response.success(req, res, { results: results });
+    })
+    .catch((err) => {
+      response.error(req, res, "Something goes wrong", 500, err);
+    });
+});
 
 router.post("/", verifyToken, (req, res) => {});
 

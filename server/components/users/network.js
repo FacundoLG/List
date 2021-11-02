@@ -36,7 +36,7 @@ router.post("/singin", (req, res) => {
       response.success(req, res, message);
     })
     .catch((err) => {
-      response.error(req, res, "Incorrect username or password", 500, err);
+      response.error(req, res, err.message, 400, err);
     });
 });
 

@@ -1,10 +1,34 @@
 import React from "react";
+import { BiLoader, BiLoaderAlt } from "react-icons/bi";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 31vh 0;
+  .loader {
+    font-size: 30px;
+    animation: rotation infinite 2s linear;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(1deg);
+    }
+    to {
+      transform: rotate(361deg);
+    }
+  }
+`;
 
 const Loading = () => {
   return (
-    <div>
-      <p>Loading...</p>
-    </div>
+    <>
+      <Container>
+        <BiLoaderAlt className="loader" />
+      </Container>
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ module.exports = {
     if (!req.headers.authorization)
       response.error(req, res, "Bad request", 400);
     const AuthContent = req.headers.authorization;
-    if (AuthContent.split(" ")[0] !== "bearer")
+    if (AuthContent?.split(" ")[0] !== "bearer")
       response.error(req, res, "Bad request", 400);
     if (!AuthContent.split(" ")[1]) response.error(req, res, "Token unviable");
     const Token = AuthContent.split(" ")[1];
