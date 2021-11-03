@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { BsHouseFill, BsGearFill } from "react-icons/bs";
 import { BiLogOutCircle } from "react-icons/bi";
 const MyNavBar = styled.nav`
-  display: flex;
+  /* display: flex; */
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

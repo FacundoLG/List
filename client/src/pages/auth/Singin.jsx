@@ -28,8 +28,8 @@ const Singin = () => {
           throw new Error(data.error);
         }
       })
-      .catch(({ message }) => {
-        setError(message);
+      .catch((message) => {
+        setError(message.message);
       });
   };
 

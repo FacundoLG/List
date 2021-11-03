@@ -22,14 +22,9 @@ const Home = () => {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [error, seterror] = useState(false);
-  const [products, setProducts] = useState([1, 2]);
+  const [products, setProducts] = useState([]);
 
-  const LogData = (data) => {
-    console.log(data);
-    console.log(user);
-    //Pushear la data usando el token en el contexto del usuario y su id
-  };
-  useEffect(() => {
+  const GetProducts = () => {
     fetch("http://localhost:3500/products", {
       method: "GET",
       headers: { Authorization: `bearer ${user.token}` },
@@ -44,12 +39,34 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const CreateProduct = (data) => {
+    console.log(data);
+    //Pushear la data usando el token en el contexto del usuario y su id
+    fetch("http://localhost:3500/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${user.token}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        GetProducts();
+      });
+  };
+
+  useEffect(() => {
+    GetProducts();
   }, []);
   return (
     <HomeContainer>
       <ProductCreator
         create={(data) => {
-          LogData(data);
+          CreateProduct(data);
         }}
       />
       <ProductList
@@ -58,7 +75,7 @@ const Home = () => {
         products={products}
         onError={() => <MyError />}
         onLoading={() => <Loading />}
-        onEmpty={() => <p>Create a Product for yor next shopping day</p>}
+        onEmpty={() => <p>Create a product for your next shopping day</p>}
         render={(product, index) => (
           <Product key={`${product?.name}_${index}`} data={product} />
         )}

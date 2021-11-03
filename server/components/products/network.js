@@ -13,7 +13,15 @@ router.get("/", verifyToken, (req, res) => {
     });
 });
 
-router.post("/", verifyToken, (req, res) => {});
+router.post("/", verifyToken, (req, res) => {
+  createProduct(req.user, req.body)
+    .then(() => {
+      response.success(req, res, "Product Created", 200);
+    })
+    .catch((err) => {
+      response.error(req, res, err.message, 500, err);
+    });
+});
 
 router.patch("/", verifyToken, (req, res) => {});
 

@@ -126,7 +126,7 @@ const ProductCreator = ({ create }) => {
     const data = {
       name: productName,
       quantity: productQuantity,
-      unity: productUnity,
+      unit: productUnity,
       color: productColor,
     };
     create(data);

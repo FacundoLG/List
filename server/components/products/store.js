@@ -6,7 +6,7 @@ module.exports = {
     const result = await productModel.find({ user_id: userData.id });
     return result;
   },
-  createProduct: async (userData, body) => {
+  createOneProduct: async (userData, body) => {
     const newProduct = new productModel({
       user_id: userData.id,
       name: body.name,

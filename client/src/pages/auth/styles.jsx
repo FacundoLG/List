@@ -15,10 +15,10 @@ export const Form = styled.div`
   align-items: center;
   width: 300px;
   height: 430px;
-  border: solid var(--font-color) 1px;
+  border: solid var(--color2) 1px;
   border-radius: 10px;
   padding: var(--space-2);
-  box-shadow: 1px 2px 5px 1px var(--light-shadow);
+  box-shadow: 1px 2px 5px 1px var(--colored-shadow);
   > div {
     width: 100%;
     display: flex;
@@ -73,10 +73,11 @@ export const InputContainer = styled.div`
   input {
     font-size: 17px;
     margin-bottom: var(--space-2);
-    padding: var(--space-0) var(--space-0-5);
+    padding: var(--space-1) var(--space-1);
     background: transparent;
     border: none;
-    border-bottom: solid 1px var(--font-color);
+    border: solid 1px var(--color2);
+    border-radius: 10px;
     color: var(--font-color);
     outline: none;
   }

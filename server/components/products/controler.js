@@ -1,7 +1,17 @@
-const { createProduct, getProducts } = require("./store");
+const { createOneProduct, getProducts } = require("./store");
 
 module.exports = {
-  createProduct: (data) => {},
+  createProduct: (user, data) => {
+    return new Promise((resolve, reject) => {
+      createOneProduct(user, data)
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  },
   getAllProducts: (userData) => {
     return new Promise((resolve, reject) => {
       const products = getProducts(userData);

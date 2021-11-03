@@ -8,8 +8,8 @@ module.exports = {
   createUser: (data) => {
     let { username, password, email } = data;
     return new Promise((resolve, reject) => {
-      getOneUser(data.username).then((result) => {
-        if (result[0]) {
+      getOneUser(data).then((result) => {
+        if (result) {
           reject({ message: "User already exist" });
         }
       });

@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { useHistory } from "react-router";
 import { InputContainer, Container, Form } from "./styles";
 const Singup = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmationPassword, setConfirmationPassword] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const createUser = () => {
+    fetch("http://localhost:3500/users/singup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+        confirmationPassword,
+      }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        if (data.error) {
+          throw new Error(data.error);
+        } else {
+          history.push("/singin");
+        }
+      })
+      .catch((message) => {
+        setError(message.message);
+      });
+  };
+
   return (
     <Container>
       <Form action="">
@@ -12,18 +42,42 @@ const Singup = () => {
           </h2>
           <InputContainer>
             <label htmlFor="">Username</label>
-            <input type="text" />
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
             <label htmlFor="">E-mail</label>
-            <input type="text" />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
             <label htmlFor="">Password</label>
-            <input type="text" />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
             <label htmlFor="">ConfirmPassword</label>
-            <input type="text" />
-            <p className="error"></p>
+            <input
+              type="password"
+              value={confirmationPassword}
+              onChange={(e) => {
+                setConfirmationPassword(e.target.value);
+              }}
+            />
+            <p className="error">{error}</p>
           </InputContainer>
         </div>
         <div>
-          <button>Sing-Up</button>
+          <button onClick={createUser}>Sing-Up</button>
           <p className="text">
             Already have and account{" "}
             <span>
