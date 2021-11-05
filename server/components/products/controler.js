@@ -1,4 +1,4 @@
-const { createOneProduct, getProducts } = require("./store");
+const { createOneProduct, getProducts, editOneProduct } = require("./store");
 
 module.exports = {
   createProduct: (user, data) => {
@@ -22,6 +22,13 @@ module.exports = {
         .catch((err) => {
           reject(err);
         });
+    });
+  },
+
+  editProduct: (newData) => {
+    return new Promise((resolve, reject) => {
+      const result = editOneProduct(newData);
+      resolve();
     });
   },
 };

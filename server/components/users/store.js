@@ -7,6 +7,7 @@ module.exports = {
       password: data.password,
       email: data.email,
     });
+    console.log("[Store] UserCreated");
     await newUser.save();
   },
   getOneUser: async (data) => {

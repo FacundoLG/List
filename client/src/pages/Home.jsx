@@ -70,6 +70,7 @@ const Home = () => {
         }}
       />
       <ProductList
+        userData={user}
         error={error}
         loading={loading}
         products={products}

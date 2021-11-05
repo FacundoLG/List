@@ -2,7 +2,7 @@ const express = require("express");
 const response = require("../../network/response");
 const router = express.Router();
 const { verifyToken } = require("../../auth/JWT");
-const { createProduct, getAllProducts } = require("./controler");
+const { createProduct, getAllProducts, editProduct } = require("./controler");
 router.get("/", verifyToken, (req, res) => {
   getAllProducts(req.user)
     .then((results) => {
@@ -23,6 +23,9 @@ router.post("/", verifyToken, (req, res) => {
     });
 });
 
-router.patch("/", verifyToken, (req, res) => {});
+router.patch("/", verifyToken, (req, res) => {
+  editProduct(req.body);
+  res.end();
+});
 
 module.exports = router;

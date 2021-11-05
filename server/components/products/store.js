@@ -16,4 +16,12 @@ module.exports = {
     });
     await newProduct.save();
   },
+  editOneProduct: async (productData) => {
+    console.log(productData);
+    const product = await productModel.findOne({ _id: productData._id });
+    if (product) {
+      await product.overwrite({ ...productData });
+      await product.save();
+    }
+  },
 };

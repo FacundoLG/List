@@ -1,5 +1,5 @@
 import React from "react";
-import { BiLoader, BiLoaderAlt } from "react-icons/bi";
+import { BiLoaderAlt } from "react-icons/bi";
 import styled from "styled-components";
 
 const Container = styled.div`

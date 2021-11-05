@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { BsCart } from "react-icons/bs";
+import { BsCart, BsXCircle } from "react-icons/bs";
 const MyProduct = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 9vh;
   border: solid var(--color2) 1px;
-  padding: var(--space-1);
-  margin: var(--space-0-5);
+  padding: var(--space-1-5);
+  margin: var(--space-0-5) 0px;
   border-radius: 10px;
   p {
     margin: 0px;
@@ -20,6 +19,7 @@ const MyProduct = styled.div`
     font-size: 25px;
     span {
       display: inline-block;
+      aspect-ratio: 4/2;
       font-size: 20px;
       text-align: center;
       padding: 1px var(--space-2);
@@ -28,20 +28,50 @@ const MyProduct = styled.div`
       border: solid 1px var(--color2);
     }
   }
-  .cart {
-    font-size: 20px;
-    padding: var(--space-1);
-    border-radius: 10px;
-    :hover {
-      cursor: pointer;
+  .iconContainer {
+    display: flex;
+    align-items: center;
+    .icon {
+      display: inline-block;
+      font-size: 24px;
+      aspect-ratio: 1;
+      padding: var(--space-0);
+      margin: 0px 0px 0px 14px;
+      border-radius: 10px;
+      :hover {
+        cursor: pointer;
+      }
+      :active {
+        background: var(--third-color);
+      }
     }
-    :active {
-      background: var(--third-color);
+    .delete {
+      color: red;
     }
   }
 `;
 
 const Product = ({ data }) => {
+  console.log(data);
+  const ChangeProductCartState = () => {
+    let newCartState;
+    if (data.cartState === "toBuy") {
+      newCartState = "buyed";
+    } else {
+      newCartState = "toBuy";
+    }
+    fetch("http://localhost:3500/products", {
+      method: "PATCH",
+      headers: {
+        Authorization: `bearer ${data.userData.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data, cartState: newCartState }),
+    })
+      .then((res) => res.json())
+      .then(console.log);
+  };
+
   useEffect(() => {
     if (data.unit) {
       data.unit =
@@ -58,7 +88,10 @@ const Product = ({ data }) => {
           </p>
         </div>
       </div>
-      <BsCart className="cart" />
+      <div className="iconContainer">
+        <BsXCircle className="icon delete" />
+        <BsCart className="icon" onClick={ChangeProductCartState} />
+      </div>
     </MyProduct>
   );
 };

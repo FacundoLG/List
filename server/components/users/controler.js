@@ -11,17 +11,17 @@ module.exports = {
       getOneUser(data).then((result) => {
         if (result) {
           reject({ message: "User already exist" });
-        }
-      });
-
-      bcrypt.hash(password, saltRounds).then((password) => {
-        addUser({ username, email, password })
-          .then(() => {
-            resolve("User created successfully");
-          })
-          .catch((err) => {
-            reject(err);
+        } else {
+          bcrypt.hash(password, saltRounds).then((password) => {
+            addUser({ username, email, password })
+              .then(() => {
+                resolve("User created successfully");
+              })
+              .catch((err) => {
+                reject(err);
+              });
           });
+        }
       });
     });
   },
