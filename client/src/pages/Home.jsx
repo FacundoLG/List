@@ -32,6 +32,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res.message.results) {
+          console.log(res.message.results);
           setProducts(res.message.results);
           setLoading(false);
         }
@@ -78,7 +79,11 @@ const Home = () => {
         onLoading={() => <Loading />}
         onEmpty={() => <p>Create a product for your next shopping day</p>}
         render={(product, index) => (
-          <Product key={`${product?.name}_${index}`} data={product} />
+          <Product
+            key={`${product?.name}_${index}`}
+            data={product}
+            refresh={GetProducts}
+          />
         )}
       />
     </HomeContainer>

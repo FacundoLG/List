@@ -51,11 +51,10 @@ const MyProduct = styled.div`
   }
 `;
 
-const Product = ({ data }) => {
-  console.log(data);
+const Product = ({ data, refresh }) => {
   const ChangeProductCartState = () => {
     let newCartState;
-    if (data.cartState === "toBuy") {
+    if (data.cartState == "toBuy") {
       newCartState = "buyed";
     } else {
       newCartState = "toBuy";
@@ -69,7 +68,10 @@ const Product = ({ data }) => {
       body: JSON.stringify({ ...data, cartState: newCartState }),
     })
       .then((res) => res.json())
-      .then(console.log);
+      .then((res) => {
+        console.log("Refreshing");
+        refresh();
+      });
   };
 
   useEffect(() => {
@@ -79,7 +81,13 @@ const Product = ({ data }) => {
     }
   }, []);
   return (
-    <MyProduct style={{ borderColor: `var(--color${data.color})` }}>
+    <MyProduct
+      style={{
+        borderColor: `var(--color${
+          data.cartState === "buyed" ? 5 : data.color
+        })`,
+      }}
+    >
       <div>
         <p className="productName">{data.name || "Mango"}</p>
         <div>

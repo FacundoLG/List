@@ -36,7 +36,7 @@ const ProductList = (props) => {
         return buyed.push(prod);
       }
     });
-
+    console.log(toBuy, buyed);
     setToBuyProducts(toBuy);
     setBuyedProducts(buyed);
   }, [props.products]);
@@ -63,7 +63,7 @@ const ProductList = (props) => {
         )}
       {!props.error &&
         buyedProducts?.map((prod, index) =>
-          props.render({ ...prod, color: 5, userData }, index)
+          props.render({ ...prod, userData }, index)
         )}
     </List>
   );
