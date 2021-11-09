@@ -25,12 +25,13 @@ const Home = () => {
   const [error, seterror] = useState(false);
   const [products, setProducts] = useState([]);
 
-  const [productsFetch, fetchData] = useFetch(
+  const [productsFetch, getData] = useFetch(
     "http://localhost:3500/products",
     "GET"
   );
+
   const GetProducts = () => {
-    fetchData();
+    getData();
     setProducts(productsFetch?.message?.results);
     setLoading(false);
   };
@@ -54,7 +55,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    GetProducts();
+    setProducts(productsFetch?.message?.results);
+    setLoading(false);
   }, [productsFetch]);
   return (
     <HomeContainer>

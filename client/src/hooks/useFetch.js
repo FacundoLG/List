@@ -4,13 +4,9 @@ import { UserContext } from "../context/user/UserContex";
 const useFetch = (URL, method, data) => {
   const { user } = useContext(UserContext);
   const [response, setResponse] = useState(null);
-  const [fetchManager, setFetchManager] = useState(false);
-  const doFetch = () => {
-    setFetchManager(!fetchManager);
-  };
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const getData = async () => {
+    try {
       const res = await fetch(URL, {
         method,
         headers: {
@@ -18,23 +14,18 @@ const useFetch = (URL, method, data) => {
           Authorization: `bearer ${user.token}`,
         },
         body: JSON.stringify(data),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) throw new Error(data.error);
-          return data;
-        })
-        .catch((err) => {
-          return err;
-        });
+      });
+      const results = await res.json();
+      setResponse(results);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, [URL]);
 
-      return res;
-    };
-
-    setResponse(fetchData());
-  }, [fetchManager, URL, user.token]);
-
-  return [response, doFetch];
+  return [response, getData];
 };
 
 export default useFetch;
