@@ -27,8 +27,13 @@ module.exports = {
 
   editProduct: (newData) => {
     return new Promise((resolve, reject) => {
-      const result = editOneProduct(newData);
-      resolve();
+      editOneProduct(newData)
+        .then(() => {
+          resolve();
+        })
+        .catch(() => {
+          reject();
+        });
     });
   },
 };

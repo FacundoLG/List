@@ -48,7 +48,7 @@ const ProductList = (props) => {
       ) : (
         ""
       )}
-      {props.error || props.products.length <= 0 ? (
+      {props.error || props.products?.length <= 0 ? (
         <EventContainer>
           {props.error && props.onError()}
           {!props.error && props.onEmpty()}

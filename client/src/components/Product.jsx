@@ -54,7 +54,7 @@ const MyProduct = styled.div`
 const Product = ({ data, refresh }) => {
   const ChangeProductCartState = () => {
     let newCartState;
-    if (data.cartState == "toBuy") {
+    if (data.cartState === "toBuy") {
       newCartState = "buyed";
     } else {
       newCartState = "toBuy";
@@ -66,6 +66,22 @@ const Product = ({ data, refresh }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...data, cartState: newCartState }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("Refreshing");
+        refresh();
+      });
+  };
+
+  const DeleteProduct = () => {
+    fetch("http://localhost:3500/products", {
+      method: "PATCH",
+      headers: {
+        Authorization: `bearer ${data.userData.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data, active: false }),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -97,7 +113,7 @@ const Product = ({ data, refresh }) => {
         </div>
       </div>
       <div className="iconContainer">
-        <BsXCircle className="icon delete" />
+        <BsXCircle className="icon delete" onClick={DeleteProduct} />
         <BsCart className="icon" onClick={ChangeProductCartState} />
       </div>
     </MyProduct>

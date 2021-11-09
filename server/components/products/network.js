@@ -24,8 +24,13 @@ router.post("/", verifyToken, (req, res) => {
 });
 
 router.patch("/", verifyToken, (req, res) => {
-  editProduct(req.body);
-  res.end();
+  editProduct(req.body)
+    .then(() => {
+      response.success(req, res, "Product Edited");
+    })
+    .catch((err) => {
+      response.error(req, res, "Internal Error", 500, err);
+    });
 });
 
 module.exports = router;

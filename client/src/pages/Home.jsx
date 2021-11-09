@@ -6,6 +6,7 @@ import MyError from "../components/MyError";
 import Product from "../components/Product";
 import ProductCreator from "../components/ProductCreator";
 import ProductList from "../components/ProductList";
+import useFetch from "../hooks/useFetch";
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,22 +25,14 @@ const Home = () => {
   const [error, seterror] = useState(false);
   const [products, setProducts] = useState([]);
 
+  const [productsFetch, fetchData] = useFetch(
+    "http://localhost:3500/products",
+    "GET"
+  );
   const GetProducts = () => {
-    fetch("http://localhost:3500/products", {
-      method: "GET",
-      headers: { Authorization: `bearer ${user.token}` },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.message.results) {
-          console.log(res.message.results);
-          setProducts(res.message.results);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchData();
+    setProducts(productsFetch?.message?.results);
+    setLoading(false);
   };
 
   const CreateProduct = (data) => {
@@ -62,7 +55,7 @@ const Home = () => {
 
   useEffect(() => {
     GetProducts();
-  }, []);
+  }, [productsFetch]);
   return (
     <HomeContainer>
       <ProductCreator

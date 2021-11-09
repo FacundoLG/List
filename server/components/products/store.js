@@ -3,7 +3,10 @@ const productModel = require("./model");
 
 module.exports = {
   getProducts: async (userData) => {
-    const result = await productModel.find({ user_id: userData.id });
+    const result = await productModel.find({
+      user_id: userData.id,
+      active: true,
+    });
     return result;
   },
   createOneProduct: async (userData, body) => {
@@ -17,11 +20,12 @@ module.exports = {
     await newProduct.save();
   },
   editOneProduct: async (productData) => {
-    console.log(productData);
     const product = await productModel.findOne({ _id: productData._id });
     if (product) {
       await product.overwrite({ ...productData });
       await product.save();
+    } else {
+      return new Error("[DB] unhandled error");
     }
   },
 };
